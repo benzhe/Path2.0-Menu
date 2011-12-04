@@ -1,7 +1,7 @@
 // JavaScript Document
 function PathShow(){
 	//位置,长宽
-	var PathPosition = {right:100,top:100,width:104,height:104};
+	var PathPosition = {position:'fixed',right:100,top:100,width:104,height:104};
 	
 	//方向 右上，右下，左下，左上
 	var Path = 3;
@@ -31,12 +31,12 @@ function PathShow(){
 	var ICount = 5;
 	
 	//按钮默认格式，格式：{'bg':'(option)','css':'(option)','cover':'(option)'};
-	var Button = {'bg':'./Path/bg-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'};	
+	var Button = {'bg':'./Path/bg-item-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'};	
 		
 	//主按钮数据，格式参考上面
 	var mainButton = [
 		//正常时
-		{'bg':'','css':'','cover':'./Path/icon-2x.png'},
+		{'bg':'./Path/bg-2x.png','css':'','cover':'./Path/icon-2x.png'},
 		//弹出时
 		{'bg':'','css':'','cover':'','angle':-135,'speed':200},
 	];
@@ -149,9 +149,9 @@ function PathShow(){
 				
 				if(parseInt($(this).css('bottom'))==0) {Y1 = 0}
 				else {
-					if(Path>=3)
+					if(Path==3 || Path==2)
 						Y1 = parseInt($(this).css('bottom')) - Offset;
-					else if(Path <=2)
+					else if(Path ==1 || Path == 4)
 						Y1 = parseInt($(this).css('bottom')) + Offset;					
 				}
 
