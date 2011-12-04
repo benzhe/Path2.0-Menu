@@ -43,12 +43,12 @@ function PathShow(){
 
 	//子按钮数据，格式参考上面
 	var itemButtons = [
-		{'bg':'','css':'','cover':'','href':'http://www.google.com'},
-		{'bg':'','css':'','cover':'','href':'http://www.google.com/reader'},
-		{'bg':'','css':'','cover':'','href':'http://www.google.com/mail'},
-		{'bg':'','css':'','cover':'','href':'http://www.google.com/images'},
-		{'bg':'','css':'','cover':'','href':'http://www.google.com/news'},
-		{'bg':'','css':'','cover':'','href':'http://www.google.com/music'}
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.google.com'},
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.google.com/reader'},
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.google.com/mail'},
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.google.com/images'},
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.google.com/news'},
+		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.google.com/music'}
 		//......
 	];	
 	
