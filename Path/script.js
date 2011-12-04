@@ -1,56 +1,83 @@
 // JavaScript Document
-function PathShow(){
+var PathMenuObj = function(classname,options){
+	
+	if(!options.PathPosition)
 	//位置,长宽
-	var PathPosition = {position:'fixed',right:100,top:100,width:104,height:104};
+		var PathPosition = {position:'fixed',right:100,top:100,width:104,height:104};
+	else PathPosition = options.PathPosition;
 	
+	if(!options.Path)
 	//方向 右上，右下，左下，左上
-	var Path = 3;
+		var Path = 3;
+	else Path = options.Path;
 	
+	if(!options.Radius)
 	//半径
-	var Radius = 300;
+		var Radius = 300;
+	else Radius = options.Radius;
 	
+	if(!options.OutSpeed )
 	//弹出初始速度
-	var OutSpeed = 80;
+		var OutSpeed = 80;
+	else OutSpeed = options.OutSpeed;
 	
+	if(!options.OutIncr)
 	//弹出递增速度
-	var OutIncr = 80;
+		var OutIncr = 80;
+	else OutIncr= options.OutIncr;
 	
+	if(!options.InSpeed )
 	//收回初始速度
-	var InSpeed = 480;
+		var InSpeed = 480;
+	else InSpeed = options.InSpeed;
 	
+	if(!options.InIncr )
 	//收回递增速度
-	var InIncr = -80;
+		var InIncr = -80;
+	else InIncr = options.InIncr;
 	
+	if(!options.Offset)
 	//回弹偏移像素
-	var Offset = 20;
+		var Offset = 20;
+	else Offset = options.Offset;
 	
+	if(!options.OffsetSpeed)
 	//回弹速度
-	var OffsetSpeed = 100;
+		var OffsetSpeed = 100;
+	else OffsetSpeed = options.OffsetSpeed;
 	
+	if(!options.ICount)
 	//子按钮个数
-	var ICount = 5;
+		var ICount = 5;
+	else ICount = options.ICount;
 	
+	if(!options.Button)
 	//按钮默认格式，格式：{'bg':'(option)','css':'(option)','cover':'(option)'};
-	var Button = {'bg':'./Path/bg-item-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'};	
-		
+		var Button = {'bg':'./Path/bg-item-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'};	
+	else Button = options.Button;
+	
+	if(!options.mainButton)
 	//主按钮数据，格式参考上面
-	var mainButton = [
-		//正常时
-		{'bg':'./Path/bg-2x.png','css':'','cover':'./Path/icon-2x.png'},
-		//弹出时
-		{'bg':'','css':'','cover':'','angle':-135,'speed':200},
-	];
-
+		var mainButton = [
+			//正常时
+			{'bg':'./Path/bg-2x.png','css':'','cover':'./Path/icon-2x.png'},
+			//弹出时
+			{'bg':'','css':'','cover':'','angle':-135,'speed':200},
+		];
+	else mainButton = options.mainButton;
+	
+	if(!options.itemButtons)
 	//子按钮数据，格式参考上面
-	var itemButtons = [
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.google.com'},
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.google.com/reader'},
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.google.com/mail'},
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.google.com/images'},
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.google.com/news'},
-		{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.google.com/music'}
-		//......
-	];	
+		var itemButtons = [
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.google.com'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.google.com/reader'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.google.com/mail'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.google.com/images'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.google.com/news'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.google.com/music'}
+			//......
+		];	
+	else itemButtons = options.itemButtons;
 	
 	
 	//生成按钮<a class="PathMain"><span></span></a>		<a class="PathItem"><span></span></a>
@@ -174,7 +201,7 @@ function PathShow(){
 		
 	}
 	
-	var PathMenuA = $('<div class="PathMenu"><div class="PathInner"></div></div>');
+	var PathMenuA = $('<div class="PathMenu '+classname+'"><div class="PathInner"></div></div>');
 	PathMenuA.filter('.PathMenu').css(PathPosition);
 	PathMenuA.children().css({'width':PathPosition['width'],'height':PathPosition['height']});
 	PathMenu.appendTo(PathMenuA.children());	

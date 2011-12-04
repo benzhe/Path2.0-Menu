@@ -10,7 +10,35 @@
 <script type="text/javascript">
 
 $(document).ready(function(e) {
-    PathShow();
+
+	//详细配置看script.js
+    var mmm= new PathMenuObj('pathmenu1',{
+		'PathPosition':{position:'fixed',bottom:100,left:100,width:104,height:104},
+		'Path':1,
+		
+	});
+	var mmmm= new PathMenuObj('pathmenu2',{		
+		'Button':{'bg':'./Path/bg-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'},	
+		
+	});
+	
+	var mmm= new PathMenuObj('pathmenu3',{
+		'PathPosition':{position:'fixed',bottom:100,right:100,width:104,height:104},
+		'Path':4,
+		'itemButtons':[
+			{'bg':'','css':'','cover':'','href':'http://www.google.com'},
+			{'bg':'','css':'','cover':'','href':'http://www.google.com/reader'},
+			{'bg':'','css':'','cover':'','href':'http://www.google.com/mail'},
+			{'bg':'','css':'','cover':'','href':'http://www.google.com/images'},
+			{'bg':'','css':'','cover':'','href':'http://www.google.com/news'},
+			{'bg':'','css':'','cover':'','href':'http://www.google.com/music'}
+			//......
+		],
+		'Radius':200
+	
+	
+	
+	});
 });
 
 
