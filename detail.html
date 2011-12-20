@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Detail</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="zh-CN" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<script type="text/javascript" src="http://jquery.com/src/jquery-latest.pack.js"></script>
+	<link href='http://alexgorbatchev.com/pub/sh/current/styles/shCore.css' rel='stylesheet' type='text/css' />
+	<script src='http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js' type='text/javascript'></script>
+	<script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js' type='text/javascript'></script>
+	<link href='http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css' rel='stylesheet' type='text/css' />
+	<style type='text/css'>
+		body {width:980px;margin:100px auto;font-size:12px !important;}
+		.syntaxhighlighter {overflow-y: hidden !important;}
+
+	</style>
+</head>
+<body>
+<pre class='brush: js;gutter: false;toolbar: false;'>
+
+//By Ben304
+//Compatible with major browsers except IE6. IE7-8 will trouble with alpha transparency but works fine.
+
+//How to use:
+//First, include jquery.js, script.js and style.css
+//Then,
+$(document).ready(function(e) {
+	
+    var mmm= new PathMenuObj('pathmenu1',{
+		//Positon And Size
+		PathPosition : {position:'fixed',right:100,top:100,width:104,height:104},
+		//1,2,3,4 For Upper-right, Lower-right, Lower-left, Upper-left
+		Path : 3,
+		//Path Radius
+		Radius : 300,
+		//Pop-up, Initial Speed, Smaller Is Faster
+		OutSpeed : 80,
+		//Pop-up, Rate Of Increase
+		OutIncr : 50,
+		//Restoration, Initial Speed
+		InSpeed : 480,
+		//Restoration, Rate Of Increase
+		InIncr : -80,
+		//Rebound Pixel
+		Offset : 40,
+		//Rebound Speed
+		OffsetSpeed : 200,
+		//Item Count
+		ICount : 5,
+		//Default Button, Format: {'bg':'(option)','css':'(option)','cover':'(option)'};
+		Button : {'bg':'./Path/bg-item-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'},	
+		//Main Button
+		mainButton : [
+			//Normal
+			{'bg':'./Path/bg-2x.png','css':'','cover':'./Path/icon-2x.png','html':''},
+			//After Pop-up
+			{'bg':'','css':'','cover':'','html':'','angle':-405,'speed':200}
+		],
+		//Item Button
+		itemButtons : [
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.apple.com/mac/','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.apple.com/ipod/','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.apple.com/iphone/','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.apple.com/ipad/','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.apple.com/itunes/','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.apple.com','target':'mframe'}
+			//......
+		]
+	});
+
+//You can also customize style.css and script.js
+
+
+//Make with heygrady's jQuery 2D Transformation Plugin - https://github.com/heygrady/transform/
+</pre>
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>

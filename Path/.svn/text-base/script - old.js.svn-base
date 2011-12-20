@@ -1,153 +1,132 @@
 // JavaScript Document
 var PathMenuObj = function(classname,options){
-
-	if(!options.DisableADV) //Have not finish
-	//Disable Advanced Effects In IE7-8
-		var DisableADV = 0;
-	else DisableADV = options.DisableADV;
 	
 	if(!options.PathPosition)
-	//Positon And Size
+	//位置,长宽
 		var PathPosition = {position:'fixed',right:100,top:100,width:104,height:104};
 	else PathPosition = options.PathPosition;
 	
 	if(!options.Path)
-	//1,2,3,4 For Upper-right, Lower-right, Lower-left, Upper-left
+	//方向 右上，右下，左下，左上
 		var Path = 3;
 	else Path = options.Path;
 	
 	if(!options.Radius)
-	//Path Radius
+	//半径
 		var Radius = 300;
 	else Radius = options.Radius;
 	
 	if(!options.OutSpeed )
-	//Pop-up, Initial Speed, Smaller Is Faster
-		var OutSpeed = 80;
+	//弹出初始速度
+		var OutSpeed = 20;
 	else OutSpeed = options.OutSpeed;
 	
 	if(!options.OutIncr)
-	//Pop-up, Rate Of Increase
-		var OutIncr = 50;
+	//弹出递增速度
+		var OutIncr = 80;
 	else OutIncr= options.OutIncr;
 	
 	if(!options.InSpeed )
-	//Restoration, Initial Speed
+	//收回初始速度
 		var InSpeed = 480;
 	else InSpeed = options.InSpeed;
 	
 	if(!options.InIncr )
-	//Restoration, Rate Of Increase
+	//收回递增速度
 		var InIncr = -80;
 	else InIncr = options.InIncr;
 	
 	if(!options.Offset)
-	//Rebound Pixel
-		var Offset = 40;
+	//回弹偏移像素
+		var Offset = 20;
 	else Offset = options.Offset;
 	
 	if(!options.OffsetSpeed)
-	//Rebound Speed
-		var OffsetSpeed = 200;
+	//回弹速度
+		var OffsetSpeed = 100;
 	else OffsetSpeed = options.OffsetSpeed;
 	
 	if(!options.ICount)
-	//Item Count
+	//子按钮个数
 		var ICount = 5;
 	else ICount = options.ICount;
 	
 	if(!options.Button)
-	//Default Button, Format：{'bg':'(option)','css':'(option)','cover':'(option)'};
+	//按钮默认格式，格式：{'bg':'(option)','css':'(option)','cover':'(option)'};
 		var Button = {'bg':'./Path/bg-item-2x.png','css':{width:104,height:104},'cover':'./Path/star-2x.png'};	
 	else Button = options.Button;
 	
 	if(!options.mainButton)
-	//Main Button
+	//主按钮数据，格式参考上面
 		var mainButton = [
-			//Normal
+			//正常时
 			{'bg':'./Path/bg-2x.png','css':'','cover':'./Path/icon-2x.png','html':'<span class="cover"></span>'},
-			//After Pop-up
-			{'bg':'','css':'','cover':'','html':'','angle':-405,'speed':200}
+			//弹出时
+			{'bg':'','css':'','cover':'','html':'','angle':-765,'speed':200}
 		];
 	else mainButton = options.mainButton;
 	
 	if(!options.itemButtons)
-	//Item Button
+	//子按钮数据，格式参考上面
 		var itemButtons = [
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.apple.com/mac/','target':'mframe'},
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.apple.com/ipod/','target':'mframe'},
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.apple.com/iphone/','target':'mframe'},
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.apple.com/ipad/','target':'mframe'},
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.apple.com/itunes/','target':'mframe'},
-			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.apple.com','target':'mframe'}
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_home.png','href':'http://www.google.com','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_thought.png','href':'http://www.google.com/reader','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_person.png','href':'http://www.google.com/mail','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_awake.png','href':'http://www.google.com/images','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_place.png','href':'http://www.google.com/news','target':'mframe'},
+			{'bg':'','css':'','cover':'./Path/Icon/moment_icn_music.png','href':'http://www.google.com/music','target':'mframe'}
 			//......
 		];	
 	else itemButtons = options.itemButtons;
-	//All Configuration Done
+	//以上配置完成
 	
 	
-	//Begin Generate Buttons
-	var str='<div class="PathMain"><div class="main"><div class="rotate"></div></div></div>';
+	//生成按钮<a class="PathMain"><span></span></a>		<a class="PathItem"><span></span></a>
+	var str='<span class="PathMain"><span class="rotate" ></span></span>';
 	for(i=0;i<ICount;i++){
-		str	+= '<div class="PathItem"><a class="link"><span class="item"></span></a></div>';
+		str	+= '<a class="PathItem"><span class="item"></span></a>';
 	}
 	var PathMenu = $(str);
 	var PathStatus = 0;
 		
-	PathMenu.children().each(function(ID){
-		//Given Default Data
+	PathMenu.each(function(ID){
+		//alert(i);
+		//赋予默认数据
 		if(Button['bg']!='') $(this).css('background-image',"url("+Button['bg']+")")
 		if(Button['css']!='')  $(this).css(Button['css']);
 		if(Button['cover']!='') $(this).children().css('background-image','url('+Button['cover']+')');
 		
-		//Main
-		if($(this).hasClass('main')){
+		//主按钮
+		if($(this).hasClass('PathMain')){
 			if(mainButton[0]['bg']!='') $(this).css('background-image','url('+mainButton[0]['bg']+')')
 			if(mainButton[0]['css']!='') $(this).css(mainButton[0]['css']);
 			if(mainButton[0]['cover']!='') $(this).children().css('background-image','url('+mainButton[0]['cover']+')');
 			if(mainButton[0]['html']!='') $(this).children().html(mainButton[0]['html']);
 			$(this).click(function(){PathRun(PathMenu)});		
 		}
-		//Item
-		else if ($(this).hasClass('link')){
-			var ItemID = $(PathMenu).filter('.PathItem').children().index($(this));
+		//子按钮
+		else if ($(this).hasClass('PathItem')){
+			var ItemID = $(PathMenu).filter('.PathItem').index($(this));
 			if(itemButtons[ItemID]['bg']!='') $(this).css('background-image','url('+itemButtons[ItemID]['bg']+')');
 			if(itemButtons[ItemID]['css']!='') $(this).css(itemButtons[ItemID]['css']);
 			if(itemButtons[ItemID]['cover']!='') $(this).children().css('background-image','url('+itemButtons[ItemID]['cover']+')');	
 			if(itemButtons[ItemID]['href']!='') $(this).attr({'href':itemButtons[ItemID]['href']});
 			if(itemButtons[ItemID]['target']!='') $(this).attr({'target':itemButtons[ItemID]['target']});
-			
-			//Bind Click For Item
-			$(this).click(function(){ItemClick($(this));});
 		}
 	});
 	
-	function ItemClick(obj){
-		if(mainButton[1]['angle']){
-			$(PathMenu.filter('.PathMain').find('.rotate')).animate({rotate:0},mainButton[1]['speed']);
-		} 	
-		$(obj).animate({scale:[4,4],opacity:0},400);
-		var Ch = $(PathMenu).filter('.PathItem').children();
-		$(Ch.not(obj)).animate({scale:[0,0],opacity:0},400,'swing');
-		$(Ch.not(obj)).children().animate({rotate:0},400,'swing',function(){
-			Ch.parent().animate({left:0,bottom:0},0);
-			Ch.animate({opacity:1,scale:[1,1]},0);
-			$(obj).children().animate({rotate:0},0);
-			PathStatus = 0;
-		});
-		
-		
-	}
 	
-	//Sort And Run
+	
+	//整理数据
 	var angle = Math.PI/((ICount-1)*2);	
 		
 	function PathRun(PathMenu){
 		var PathItems = PathMenu.filter('.PathItem').slice(0,ICount);
 		if(PathStatus == 0){
+			//var PathItems = PathMenu.filter('.PathItem');
 			var Count = PathItems.size();
 			PathItems.each(function(SP){
-				var ID = $(this).index(); //Begin with 1
+				var ID = $(this).index(); //由1开始
 				if (ID == 1) {
 					var X = Radius;
 					var Y = 0; 
@@ -174,8 +153,11 @@ var PathMenuObj = function(classname,options){
 				else if(Path==4){X=-X;X1=-X1}
 
 				
-				$(this).children().children().animate({rotate:720},600);
-				
+				$(this).children().rotate({
+					duration:600,
+					//angle: 160
+					animateTo:720
+				});	
 				$(this).animate({left:X1,bottom:Y1},OutSpeed+SP*OutIncr,function(){
 						$(this).animate({left:X,bottom:Y},OffsetSpeed);
 				});	
@@ -184,12 +166,16 @@ var PathMenuObj = function(classname,options){
 			});
 			
  			if(mainButton[1]['angle']){
-				$(PathMenu.filter('.PathMain').find('.rotate')).animate({rotate:mainButton[1]['angle']},mainButton[1]['speed']);
+				$(PathMenu.filter('.PathMain').find('.rotate')).rotate({
+					duration:mainButton[1]['speed'],
+					//angle: 160
+					animateTo:mainButton[1]['angle']
+				});
 			} 
-			if(mainButton[1]['bg']!='') $(this).children().css('background-image','url('+mainButton[1]['bg']+')')
-			if(mainButton[1]['css']!='') $(this).children().css(mainButton[1]['css']);
-			if(mainButton[1]['cover']!='') $(this).children().children().css('background-image','url('+mainButton[1]['cover']+')');
-			if(mainButton[1]['html']!='') $(this).children().html(mainButton[1]['html']);
+			if(mainButton[1]['bg']!='') $(this).css('background-image','url('+mainButton[1]['bg']+')')
+			if(mainButton[1]['css']!='') $(this).css(mainButton[1]['css']);
+			if(mainButton[1]['cover']!='') $(this).children().css('background-image','url('+mainButton[1]['cover']+')');
+			if(mainButton[1]['html']!='') $(this).html(mainButton[1]['html']);
 			
 			PathStatus = 1;
 		}
@@ -210,8 +196,11 @@ var PathMenuObj = function(classname,options){
 					else if(Path ==1 || Path == 4)
 						Y1 = parseInt($(this).css('bottom')) + Offset;					
 				}
-				$(this).children().children().animate({rotate:0},600);
-	
+				$(this).children().rotate({
+					duration:600,
+					//angle: 160
+					animateTo:0
+				});	
 				$(this).animate({left:X1,bottom:Y1},OffsetSpeed,function(){
 					$(this).animate({left:0,bottom:0},InSpeed+SP*InIncr);
 					
@@ -221,13 +210,17 @@ var PathMenuObj = function(classname,options){
 			});
 			
  			if(mainButton[1]['angle']){
-				$(PathMenu.filter('.PathMain').find('.rotate')).animate({rotate:0},mainButton[1]['speed']);
+				$(PathMenu.filter('.PathMain').find('.rotate')).rotate({
+					duration:mainButton[1]['speed'],
+					//angle: 160
+					animateTo:0
+				});
 			} 		
 			
-			if(mainButton[0]['bg']!='') $(this).children().css('background-image','url('+mainButton[0]['bg']+')')
-			if(mainButton[0]['css']!='') $(this).children().css(mainButton[0]['css']);
-			if(mainButton[0]['cover']!='') $(this).children().children().css('background-image','url('+mainButton[0]['cover']+')');
-			if(mainButton[0]['html']!='') $(this).children().html(mainButton[0]['html']);			
+			if(mainButton[0]['bg']!='') $(this).css('background-image','url('+mainButton[0]['bg']+')')
+			if(mainButton[0]['css']!='') $(this).css(mainButton[0]['css']);
+			if(mainButton[0]['cover']!='') $(this).children().css('background-image','url('+mainButton[0]['cover']+')');
+			if(mainButton[0]['html']!='') $(this).html(mainButton[0]['html']);			
 			
 			
 			PathStatus = 0;
